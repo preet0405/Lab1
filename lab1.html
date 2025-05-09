@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Inserting and Deleting Rows in a Table</title>
+  <style>
+    table, td, th{
+      border: 3px solid black;
+      border-collapse: separate;
+      padding: 7px;
+      text-align: center;
+    }
+    button {
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <table id="myTable">
+    <tbody>
+      <tr><td>Row1 Col1</td><td>Row1 Col2</td></tr>
+      <tr><td>Row2 Col1</td><td>Row2 Col2</td></tr>
+      <tr><td>Row3 Col1</td><td>Row3 Col2</td></tr>
+      <tr><td>Row4 Col1</td><td>Row4 Col2</td></tr>
+      <tr><td>Row5 Col1</td><td>Row5 Col2</td></tr>
+    </tbody>
+  </table>
+
+  <br>
+  <button onclick="insertRow()">Insert row</button>
+  <button onclick="deleteRow()">delete row</button>
+  <p id="message">Message:</p>
+
+  <script>
+    function insertRow() {
+      const table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+      const rowCount = table.rows.length;
+      const newRow = table.insertRow();
+
+      const cell1 = newRow.insertCell(0);
+      const cell2 = newRow.insertCell(1);
+
+      const rowNumber = rowCount + 1;
+      cell1.innerHTML = `Row${rowNumber} Col1`;
+      cell2.innerHTML = `Row${rowNumber} Col2`;
+
+      // Clear the message if it said "No more rows to delete"
+      document.getElementById("message").textContent = "Message:";
+    }
+
+    function deleteRow() {
+      const table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+      if (table.rows.length > 0) {
+        table.deleteRow(0);
+        if (table.rows.length === 0) {
+          const msg = "Message: No more rows to delete";
+          document.getElementById("message").textContent = msg;
+          alert(msg); // Displaying message in an alert box
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
+
